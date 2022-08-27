@@ -7,3 +7,4 @@ Codebase for Supply Chain Prototype
 
 ###################### Install Dependencies ############
 1. Navigate into app directory >> **npm install**
+2. >> **nodemon index.js**
