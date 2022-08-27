@@ -6,4 +6,4 @@ Codebase for Supply Chain Prototype
 2. Any Code Editor (VS Code)
 
 ###################### Install Dependencies ############
-1. Navigate into app directory >> 
+1. Navigate into app directory >> **npm install**
