@@ -93,19 +93,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 });
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, () =>{
   console.log(`Server started on port: ${port}`);
 });
-
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const client = require('twilio')(accountSid, authToken);
-
-// client.messages
-//       .create({
-//          from: 'whatsapp:+14155238886',
-//          body: 'Hello there!',
-//          to: 'whatsapp:+919340146989'
-//        })
-//       .then(message => console.log(message));
