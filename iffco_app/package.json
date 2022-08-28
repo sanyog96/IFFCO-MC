@@ -19,6 +19,7 @@
     "express-mongo-sanitize": "^2.2.0",
     "express-session": "^1.17.3",
     "method-override": "^3.0.0",
-    "mongoose": "^6.5.3"
+    "mongoose": "^6.5.3",
+    "twilio": "^3.81.0"
   }
 }
