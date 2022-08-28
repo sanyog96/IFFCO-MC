@@ -3,7 +3,11 @@
 <div class="container">
     <div class="bg-light rounded-lg p-4 mt-4">
         <h2>Add New Product to Inventory</h2>
-        <form class="mt-3" action="/products" method="post">
+        <form class="mt-3" action="/products/new" method="post">
+          <div class="mb-3">
+            <label for="prodId" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="prodId" aria-describedby="enter new product id" name="product[prodId]">
+          </div>
             <div class="mb-3">
               <label for="prodName" class="form-label">Product Name</label>
               <input type="text" class="form-control" id="prodName" aria-describedby="enter new product name" name="product[name]">
@@ -16,6 +20,10 @@
                   <option value="<%= category._id %>"><%= category.name %></option>
                 <% } %>
               </select>
+            </div>
+            <div class="mb-3">
+              <label for="prodDesc" class="form-label">Product Description</label>
+              <input type="text" class="form-control" id="prodDesc" aria-describedby="enter new product description" name="product[description]">
             </div>
             <button type="submit" class="btn btn-primary">Create Product</button>
           </form>

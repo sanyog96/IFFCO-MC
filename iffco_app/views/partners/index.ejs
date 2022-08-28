@@ -1,0 +1,74 @@
+<% layout('layouts/base') %>
+
+<div class="container">
+   
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                  <h1 class="display-5 fw-bold">Channel Partner Management</h1>
+                  <p class="col-md-8 fs-4">IFFCO-MC Agro-Chemicals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-5 mb-4 bg-dark text-white rounded-3">
+                <form class="row g-3" action="/partners" method="post">
+                    <h4>Partner KYC Registration</h4>
+                    <div class="col-md-6">
+                      <label for="inputName" class="form-label">Partner Name</label>
+                      <input type="text" class="form-control" id="inputName" name="partner[name]">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputContact" class="form-label">Contact</label>
+                        <input type="number" class="form-control" id="inputContact" name="partner[contact]">
+                      </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="partner[address][location]">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputState" class="form-label">State</label>
+                      <input type="text" class="form-control" id="inputState" name="partner[address][state]">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="number" class="form-control" id="inputZip" name="partner[address][pincode]">
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                  </form>
+            </div>            
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Contact</th>
+              
+              <th>Address</th>
+              <th>State</th>
+              <th>Pincode</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let partner of partners){ %>
+            <tr>
+              <td><%= partner.name %></td>
+              <td><%= partner.contact %></td>
+              <td><%= partner.address.location %></td>
+              <td><%= partner.address.state %></td>
+              <td><%= partner.address.pincode %></td>
+            </tr>
+            <% } %>
+          </tbody>
+    
+        </table>
+      </div>
+
+</div>

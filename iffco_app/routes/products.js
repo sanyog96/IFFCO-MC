@@ -4,6 +4,9 @@ const products = require('../controllers/products');
 const catchAsync = require('../utils/catchAsync');
 
 router.route("/")
+    .get(catchAsync(products.index));
+
+router.route("/new")
     .get(catchAsync(products.renderForm))
     .post(catchAsync(products.createProduct));
 

@@ -1,12 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFFCO-MC Prototype</title>
-</head>
-<body>
-    <h1>Products Page</h1>
-</body>
-</html>
+<% layout('layouts/base') %>
+
+<div class="container">
+
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold">Inventory Management</h1>
+          <p class="col-md-8 fs-4">IFFCO-MC Agro-Chemicals</p>
+          <a class="btn btn-primary" type="button" href="/products/new">Add New Product</a>
+          <a class="btn btn-dark" type="button" href="/products/category">Add New Category</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            
+            <th>Category</th>
+            <th>Available Pack Sizes</th>
+            <th>Quantity Available</th>
+            <th>Description</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let product of products){ %>
+          <tr>
+            <td><%= product.prodId %></td>
+            <td><%= product.name %></td>
+            <td><%= product.category.name %></td>
+            <td>250g, 500g, 1kg</td>
+            <td>1000</td>
+            <td><%= product.description %></td>
+          </tr>
+          <% } %>
+        </tbody>
+  
+      </table>
+    </div>
+    
+</div>

@@ -2,7 +2,8 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 
 module.exports.index = async (req, res) => {
-    res.render('products/index');
+    const products = await Product.find({}).populate('category');
+    res.render('products/index',{products});
 }
 
 module.exports.renderCategoryForm = async (req, res) => {
@@ -15,7 +16,7 @@ module.exports.renderForm = async (req, res) => {
 }
 
 module.exports.createProduct = async(req, res) => {
-    const product = new Product({ ... req.body.product, category: req.body.category});
+    const product = new Product({... req.body.product, category: req.body.category});
     await product.save();
     req.flash('success', 'Successfully Created New Product');
     res.redirect('/products');

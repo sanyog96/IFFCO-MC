@@ -17,6 +17,8 @@ const dbUrl = process.env.DB_URL
 
 const homeRoutes = require('./routes/home');
 const productRoutes = require('./routes/products');
+const partnerRoutes = require('./routes/partners');
+const orderRoutes = require('./routes/orders');
 
 const MongoDBStore = require("connect-mongo");
 
@@ -75,7 +77,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/', homeRoutes);
-app.use('/products', productRoutes)
+app.use('/products', productRoutes);
+app.use('/partners', partnerRoutes);
+app.use('/orders', orderRoutes);
 
 //Error Middlewares
 
