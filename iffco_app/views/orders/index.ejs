@@ -54,8 +54,10 @@
             </tr>
           </thead>
           <tbody>
-            <td>Akhil</td>
-            <td>9340146989</td>
+            <% for(let order of orders){ %>
+            <tr>
+              <td><%= order.partner.name %></td>
+            <td><%= order.partner.contact %></td>
             <td>
                 <table class="table table-bordered">
                     <thead>
@@ -72,7 +74,9 @@
                     </tbody>
                   </table>
             </td>
-            <td>28/8/2022</td>
+            <td><%= order.date %></td>
+            </tr>
+            <% } %>
           </tbody>
         </table>
       </div>

@@ -17,7 +17,7 @@ const orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'partner'
     },
-    products:[prodSchema],
+    // products:[prodSchema],
     date: {
         type: Date,
         default: Date.now

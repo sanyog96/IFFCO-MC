@@ -9,4 +9,8 @@ router.route("/")
 router.route("/whatsapp")
     .post(catchAsync(orders.serveWhatsapp))
 
+router.route("/:contact/new")
+    .get(catchAsync(orders.orderForm))
+    .post(catchAsync(orders.placeOrder))
+
 module.exports = router;

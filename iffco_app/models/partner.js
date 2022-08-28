@@ -24,7 +24,8 @@ const partnerSchema = new Schema({
     address: addressSchema,
     contact:{
         type: Number,
-        required: true
+        required: true,
+        unique: true
     }
 });
 
