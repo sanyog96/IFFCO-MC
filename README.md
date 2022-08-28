@@ -10,7 +10,7 @@ Codebase for Supply Chain Prototype
 1. Create ngrok account and get unique **auth_token**
 2. Create twilio account & get unique **account_ssid** & **auth_token** and save them as path variable (in .env file)
 3. Navigate to directory where ngrok is downloaded & unzip to get ngrok.exe
->> **./ngrok config add-authtoken <token>**
+>> **./ngrok config <add-unique-ngrok-authtoken> <token>**
 
 >> **./ngrok http 8080**
 
