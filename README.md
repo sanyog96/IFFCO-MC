@@ -17,11 +17,11 @@ Codebase for Supply Chain Prototype
 
 ```
 ./ngrok config add-unique-ngrok-authtoken
+./ngrok http 8080
 ```
 
->> **./ngrok http 8080**
-
-4. Navigate into app directory 
->> **npm install**
-
->> **nodemon index.js**
+Navigate into app directory 
+```
+npm install
+nodemon index.js
+```
