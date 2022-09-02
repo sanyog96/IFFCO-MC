@@ -8,8 +8,12 @@ Codebase for Supply Chain Prototype
 
 ###################### Install Dependencies ############
 1. Create ngrok account and get unique **auth_token**
-2. Create twilio account & get unique **account_ssid** & **auth_token** and save them as path variable (in .env file)
-3. Navigate to directory where ngrok is downloaded & unzip to get ngrok.exe
+2. Create twilio account & get unique **TWILIO_ACCOUNT_SID** & **TWILIO_AUTH_TOKEN**
+3. Create Mongo Atlas Account, get **DB_URL**
+4. Create Cloudinary Account, get **CLOUDINARY_CLOUD_NAME**, **CLOUDINARY_KEY**, **CLOUDINARY_SECRET**
+5. Save all of them as path variable (in .env file)
+6. Navigate to directory where ngrok is downloaded & unzip to get ngrok.exe
+
 >> **./ngrok config add-unique-ngrok-authtoken**
 
 >> **./ngrok http 8080**
