@@ -33,7 +33,9 @@ module.exports.damageIndex = async (req, res) => {
 
 module.exports.index = async (req, res) => {
     const orders = await Order.find({}).populate('partner').populate('products.prodId');
-    res.render('orders/index', {orders});
+    var d = new Date();
+    const delayedOrders = await Order.find({date : {'$lte' : new Date(d.setHours(d.getHours() - 8))}, '$orderby' : {date : 1}}).populate('partner').populate('products.prodId');
+    res.render('orders/index', {orders, delayedOrders});
 }
 
 module.exports.serveWhatsapp = async (req, res) => {

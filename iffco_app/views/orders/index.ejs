@@ -44,6 +44,50 @@
     </div>
 
     <div class="table-responsive">
+      <h4>Delayed by 8 Hrs</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Order</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let order of delayedOrders){ %>
+          <tr>
+            <td><%= order.partner.name %></td>
+          <td><%= order.partner.contact %></td>
+          <td>
+              <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Qty</th>
+                      <th>Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(let product of order.products){ %>
+                      <tr>
+                      <td><%= product.prodId.name %></td>
+                      <td><%= product.qty %></td>
+                      <td><%= product.prodId.pack %></td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+          </td>
+          <td><%= order.date %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-responsive my-3">
+      <h4>All Orders</h4>
         <table class="table table-bordered">
           <thead>
             <tr>
