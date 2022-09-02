@@ -15,6 +15,13 @@ const productSchema = new Schema({
     },
     description:{
       type: String
+    },
+    price: {
+      type: Number,
+      minimum: 0
+    },
+    pack:{
+      type: String
     }
 });
 

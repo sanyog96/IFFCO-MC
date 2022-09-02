@@ -13,4 +13,10 @@ router.route("/:contact/new")
     .get(catchAsync(orders.orderForm))
     .post(catchAsync(orders.placeOrder))
 
+router.route("/:orderid/invoice")
+    .get(catchAsync(orders.invoice))
+
+router.route("/:orderid/track")
+    .get(catchAsync(orders.track))
+
 module.exports = router;
