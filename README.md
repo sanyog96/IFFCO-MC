@@ -1,6 +1,10 @@
 # IFFCO-MC
 Codebase for Supply Chain Prototype
 
+###################### Demo ############################
+
+Hosted app : [agrosupply.herokuapp.com](https://agrosupply.herokuapp.com/)
+
 ###################### Installation ####################
 1. Node Js (to run javscript outside browser) from official website | Verify by typing "**node**" in terminal >> Node REPL Terminal opens up
 2. Any Code Editor (VS Code)
