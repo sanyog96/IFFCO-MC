@@ -1,0 +1,42 @@
+<% layout('layouts/base') %>
+
+<div class="container">
+    <div class="row g-3">
+        <div class="col-md-12">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                  <h1 class="display-5 fw-bold">Damage Request by Channel Partners</h1>
+                  <p class="col-md-8 fs-4">IFFCO-MC Agro-Chemicals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-image">
+                <thead>
+                  <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Billing Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(let damage of damages){ %> 
+                  <tr>
+                    <th scope="row"><%= damage.orderId._id %></th>
+                    <th scope="row"><%= damage.orderId.partner.name %></th>
+                    
+                    <td><%=damage.orderId.partner.address.location %></td>
+                    <td><%=damage.date%></td>
+                    <td class="w-25">
+                        <img src="<%=damage.image.url%>" class="img-fluid img-thumbnail" alt="Sheep">
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
+</div>

@@ -1,11 +1,35 @@
 const Order = require('../models/order');
 const Partner = require('../models/partner');
 const Product = require('../models/product');
+const Damage = require('../models/damage');
 const qr = require('qrcode');
+const otpGenerator = require('otp-generator');
+const {cloudinary} = require("../cloudinary");
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+
+module.exports.damageForm = async (req, res) => {
+  const {orderid} = req.params;
+  const damage = new Damage({ orderId : orderid});
+  console.log(req.file);
+  damage.image = {url: req.file.path, filename: req.file.filename};
+  await damage.save();
+  req.flash('success', 'Successfully Placed Damage Request! Sorry for inconvinience');
+  res.redirect('/orders/'+orderid+'/track');
+}
+
+module.exports.damageIndex = async (req, res) => {
+  const damages = await Damage.find({}).populate({
+    path : 'orderId',
+    populate : {
+      path : 'partner',
+      model : 'partner'
+    }
+  })
+  res.render('orders/damageIndex', {damages})
+}
 
 module.exports.index = async (req, res) => {
     const orders = await Order.find({}).populate('partner').populate('products.prodId');
@@ -80,4 +104,35 @@ module.exports.track = async (req, res) => {
   const {orderid} = req.params;
   const order = await Order.findOne({_id : orderid}).populate('partner').populate('products.prodId');
   res.render('orders/track', {order});
+}
+
+module.exports.otp = async (req, res) => {
+  const {orderid} = req.params;
+  otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+  const x = await Order.findByIdAndUpdate({"_id": orderid}, {"otp" : otp}, {new: true});
+  
+  const order = await Order.findById({"_id" : orderid}).populate('partner')
+
+  contact = order.partner.contact
+
+  message = otp;
+  client.messages
+      .create({
+         from: 'whatsapp:+14155238886',
+         body: message,
+         to: 'whatsapp:+91'+contact
+       })
+      .then(message => console.log(message));
+  res.send({"message" : "OTP Send to Channel Partner"});
+}
+
+module.exports.verifyOtp = async (req, res) => {
+  const {orderid} = req.params;
+  const otp = req.body.otp;
+  const order = await Order.findOne({_id : orderid});
+  if(order.otp == otp){
+    res.send({"message" : "OTP Verified"});
+  }else{
+    res.send({"message" : "OTP not verified"});
+  }
 }

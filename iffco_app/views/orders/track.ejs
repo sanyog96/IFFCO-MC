@@ -37,10 +37,96 @@
             <div class="p-5 mb-4 bg-light rounded-3">
                 <h4>C&F Delivery & Order Management</h4>
                 <div class="d-grid gap-2 mt-4">
-                  <button class="btn btn-danger" type="button">Generate POD</button>
-                  <button class="btn btn-warning" type="button" href="">Report Damaged</button>
+                    <button id="pod" class="btn btn-danger" type="button">Generate POD</button>
+                    <button id="damageBtn" class="btn btn-warning" type="button">Report Damaged</button>
                 </div>
-            </div>            
+            </div>
+
+            <div class="p-5 mb-4 bg-light rounded-3 d-none" id="enterOtp">
+              <h4>Enter OTP</h4>
+              <div class="d-grid gap-2">
+                <div class="row">
+                  <form method="POST" class="row g-3">
+                    <div class="col-auto">
+                      <label for="otpId" class="visually-hidden">OTP</label>
+                      <input type="password" class="form-control" id="otpId" placeholder="Password" name="otp">
+                    </div>
+                    <div class="col-auto">
+                      <button id="verify" class="btn btn-primary" type="submit">Verify</button>
+                    </div>
+                    <div><p id="message"></p></div>
+                  </form>
+                </div>  
+              </div>
+            </div>
+
+            <div class="p-5 mb-4 bg-light rounded-3 d-none" id="enterDamage">
+              <h4>Upload Image</h4>
+              <div class="d-grid gap-2">
+                <div class="row">
+
+                  <form method="POST" class="row g-3" enctype="multipart/form-data" action="/orders/<%=order._id%>/damage">
+                    <div class="col-12">
+                      <label for="formFile" class="form-label">File input</label>
+                      <input class="form-control" type="file" name="image">
+                      <div class="d-grid gap-2 mt-4"><button class="btn btn-danger" type="submit">Upload</button></div>
+                    </div>
+                  </form>
+
+                </div>  
+              </div>
+            </div>
+
         </div>
     </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+
+  $("#pod").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "GET",
+      url: "/orders/<%=order._id%>/otp",
+      data: {
+        id: $("#pod").val()
+      },
+      success: function(result) {
+        console.log(result.message)
+        var element = document.getElementById("enterOtp")
+        element.classList.remove("d-none")
+      },
+      error: function(result) {
+        alert('error');
+      }
+    });
+  });
+
+  $("#damageBtn").click(function(e) {
+    e.preventDefault();
+    var element = document.getElementById("enterDamage")
+    element.classList.remove("d-none")
+  });
+
+  $("#verify").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/orders/<%=order._id%>/otp",
+      data: {
+        otp: $("#otpId").val()
+      },
+      success: function(result) {
+        console.log(result.message)
+        var element = document.getElementById("message")
+        element.innerHTML = result.message
+      },
+      error: function(result) {
+        alert('error');
+      }
+    });
+  });
+
+  });
+</script>
