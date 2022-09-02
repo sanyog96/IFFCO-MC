@@ -11,11 +11,11 @@ Hosted app : [agrosupply.herokuapp.com](https://agrosupply.herokuapp.com/)
 3. ngrok (for tunneling local application to twilio webhooks)
 
 ###################### Install Dependencies ############
-1. Create ngrok account and get unique **auth_token**
-2. Create twilio account & get unique **TWILIO_ACCOUNT_SID** & **TWILIO_AUTH_TOKEN**
+1. Create ngrok account and get unique *auth_token* to run ngrok server
+2. Create twilio account & get unique **TWILIO_ACCOUNT_SID** & **TWILIO_AUTH_TOKEN** & set webhook server endpoint inside twilio console
 3. Create Mongo Atlas Account, get **DB_URL**
 4. Create Cloudinary Account, get **CLOUDINARY_CLOUD_NAME**, **CLOUDINARY_KEY**, **CLOUDINARY_SECRET**
-5. Save all of them as path variable (in .env file)
+5. Save all of the above bold variables as path variable in .env file inside app directory
 6. Navigate to directory where ngrok is downloaded & unzip to get ngrok.exe
 
 
