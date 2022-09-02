@@ -1,7 +1,26 @@
-###################### Installation ####################
-1. Node Js (to run javscript ourside browser) from official website | Verify by typing "node" in terminal >> Node REPL Terminal opens up
-2. Any Code Editor (VS Code)
+Codebase for Supply Chain Prototype
 
+###################### Demo ############################
+
+Hosted app : agrosupply.herokuapp.com
+
+###################### Installation ####################
+
+Node Js (to run javscript outside browser) from official website | Verify by typing "node" in terminal >> Node REPL Terminal opens up
+Any Code Editor (VS Code)
+ngrok (for tunneling local application to twilio webhooks)
 ###################### Install Dependencies ############
-1. Navigate into app directory >> **npm install**
-2. Run App >> **nodemon index.js**
+
+Create ngrok account and get unique auth_token to run ngrok server
+Create twilio account & get unique TWILIO_ACCOUNT_SID & TWILIO_AUTH_TOKEN & set webhook server endpoint inside twilio console
+Create Mongo Atlas Account, get DB_URL
+Create Cloudinary Account, get CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY, CLOUDINARY_SECRET
+Save all of the above uppercase variables as path variable in .env file inside app directory
+
+Navigate to directory where ngrok is downloaded & unzip to get ngrok.exe
+>> ./ngrok config add-unique-ngrok-authtoken
+>> ./ngrok http 8080
+
+Navigate into app directory
+>> npm install
+>> nodemon index.js
