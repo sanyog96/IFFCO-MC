@@ -10,6 +10,9 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
+const fs = require("fs");
+const PDFDocument = require("pdfkit");
+
 module.exports.damageForm = async (req, res) => {
   const {orderid} = req.params;
   const damage = new Damage({ orderId : orderid});
@@ -34,8 +37,13 @@ module.exports.damageIndex = async (req, res) => {
 module.exports.index = async (req, res) => {
     const orders = await Order.find({}).populate('partner').populate('products.prodId');
     var d = new Date();
-    const delayedOrders = await Order.find({date : {'$lte' : new Date(d.setHours(d.getHours() - 8))}, '$orderby' : {date : 1}}).populate('partner').populate('products.prodId');
-    res.render('orders/index', {orders, delayedOrders});
+    var dmlseconds = d.getTime();
+    var delay = 16;
+    const delayedOrders = await Order.find({date : {'$lte' : new Date(d.setHours(d.getHours() - delay))}, '$orderby' : {date : 1}}).populate('partner').populate('products.prodId');
+    for (let i = 0; i < delayedOrders.length; i++){
+      delayedOrders[i].duration = (dmlseconds - d.getTime())/(1000 * 60 * 60);
+    }
+    res.render('orders/index', {orders, delayedOrders, delay});
 }
 
 module.exports.serveWhatsapp = async (req, res) => {
@@ -125,14 +133,23 @@ module.exports.otp = async (req, res) => {
          to: 'whatsapp:+91'+contact
        })
       .then(message => console.log(message));
-  res.send({"message" : "OTP Send to Channel Partner"});
+  res.send({"message" : "OTP Sent to Channel Partner"});
 }
 
 module.exports.verifyOtp = async (req, res) => {
   const {orderid} = req.params;
   const otp = req.body.otp;
   const order = await Order.findOne({_id : orderid});
+  const deliveryContact = 9340146989;
+  var message = "Proof of Delivery recieved for Order ID : \n\n" + orderid;
   if(order.otp == otp){
+    client.messages
+      .create({
+         from: 'whatsapp:+14155238886',
+         body: message,
+         to: 'whatsapp:+91'+deliveryContact
+       })
+      .then(message => console.log(message));
     res.send({"message" : "OTP Verified"});
   }else{
     res.send({"message" : "OTP not verified"});

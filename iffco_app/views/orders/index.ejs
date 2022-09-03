@@ -52,6 +52,7 @@
             <th>Contact</th>
             <th>Order</th>
             <th>Date</th>
+            <th>Time Elapsed for delivery</th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +81,7 @@
                 </table>
           </td>
           <td><%= order.date %></td>
+          <td><%= order.duration %></td>
           </tr>
           <% } %>
         </tbody>
