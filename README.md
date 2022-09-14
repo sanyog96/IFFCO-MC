@@ -29,4 +29,3 @@ Navigate into app directory
 npm install
 nodemon index.js
 ```
-# -IFFCO-MC
